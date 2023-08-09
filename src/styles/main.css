@@ -72,8 +72,14 @@ html {
 	padding: 15px;
 }
 .game__inner {
+	height: 100%;
 	background: #fff;
 	border-radius: 20px;
+	box-shadow: 0px 0px 10px rgba(255, 255, 255, .8);
+	transition: box-shadow .5s;
+}
+.game__inner:hover {
+	box-shadow: 0px 0px 20px rgba(255, 255, 255, .8);
 }
 .game__img {
 	display: block;
@@ -86,6 +92,9 @@ html {
 	color: #000;
 	text-align: center;
 	text-transform: uppercase;
+}
+.title_size_s {
+	font-size: 16px;
 }
 .title_size_m {
 	font-size: 20px;
@@ -103,16 +112,11 @@ html {
 	padding: 20px;
 	font-family: Roboto-Medium;
 	text-transform: uppercase;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
 	transition: all .25s;
 	transform-origin: center;
 	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
 	cursor: pointer;
-}
-.btn:hover {
-	box-shadow: 0px 0px 20px rgba(0, 0, 0, .8);
-	transform: scale(1.02);
 }
 .btn_size_m {
 	font-size: 20px;
@@ -134,8 +138,20 @@ html {
 	transform: translateY(100%);
 }
 .contact__btn {
+	box-shadow: 0px 0px 30px rgba(158, 0, 0, 1);
 	background: #9e0000;
 	color: #fff;
+}
+.contact__btn:hover {
+	box-shadow: 0px 0px 50px rgba(158, 0, 0, 1);
+	transform: scale(1.02);
+}
+.game__btn {
+	border: 2px solid #000;
+}
+.game__btn:hover {
+	background: #fff;
+	color: #000;
 }
 @keyframes fly {
 	0% {
@@ -161,6 +177,9 @@ html {
 	}
 	.title_size_m {
     	font-size: 1.9vw;
+	}
+	.title_size_s {
+    	font-size: 1.6vw;
 	}
 	.game__btn {
 		font-size: 2vw;
@@ -193,4 +212,12 @@ html {
 	.contact {
     	position: relative;
     }
+}
+@media all and (max-width: 320px) {
+	.game {
+		width: 100%;
+	}
+	.games {
+		padding: 0.5vw;
+	}
 }
