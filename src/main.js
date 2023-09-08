@@ -1,14 +1,71 @@
-window.addEventListener('load', event => {
-	const MIN_WIDTH = 560;	
+const _MIN_WIDTH = 560;
 
+window.addEventListener('load', event => {
 	document.body.classList.add('body_loaded');
 
-	if (window.innerWidth <= MIN_WIDTH) {
+	new ContactForm();
+
+	if (window.innerWidth <= _MIN_WIDTH) {
 		return;
 	}
 
 	new Main().start();
 });
+
+class ContactForm {
+
+	constructor() {
+		this._DEMONSTRATION_POPUP_TIME = 2;
+		this._timeline = gsap.timeline();
+		this._form = document.getElementById("my-form");
+		this._closeForm = document.querySelector('.form-overlay__btn');
+		this._contactUs = document.querySelector('.contact__btn');
+		this._status = document.getElementById("my-form-status");
+
+		this._closeForm.addEventListener('click', () => document.body.classList.remove('form-opened'));
+		this._contactUs.addEventListener('click', () => document.body.classList.add('form-opened'));
+		this._form.addEventListener("submit", this._handleSubmit.bind(this));
+	}
+
+	_handleSubmit(event) {
+	  event.preventDefault();
+
+	  const data = new FormData(event.target);
+
+	  fetch(event.target.action, {
+	    method: this._form.method,
+	    body: data,
+	    headers: { 'Accept': 'application/json' }
+	  }).then(response => {
+	    if (response.ok) {
+	      this._showStatus("Thanks for your submission!");
+	      this._form.reset();
+	    } else {
+	      response.json().then(data => {
+	        if (Object.hasOwn(data, 'errors')) {
+	          this._showStatus(data["errors"].map(error => error["message"]).join(", "));
+	        } else {
+	          this._showStatus("Oops! There was a problem submitting your form");
+	        }
+	      });
+	    }
+	  }).catch(error => {
+	    this._showStatus("Oops! There was a problem submitting your form");
+	  });
+	}
+
+	_showStatus(message) {
+		this._timeline.kill();
+		this._timeline.add(() => {
+			this._form.classList.remove('status-visible');
+			document.body.classList.remove('form-opened')
+		}, this._DEMONSTRATION_POPUP_TIME);
+		this._form.classList.add('status-visible');
+
+		this._status.innerHTML = message;
+	}
+
+}
 
 class Main {
 
@@ -22,6 +79,7 @@ class Main {
 		this._logo.create();
 		this._games.create();
 		this._footer.classList.add('contact_hide');
+
 		this._footer.style.transition = 'transform .5s';
 	}
 
@@ -122,7 +180,6 @@ class Games {
 				duration
 			);
 		};
-		// this._timeline.set({}, {}, `+=${this._FADE_DURATION * (this._list.children.length - 1)}`);
 	}
 
 }
