@@ -14,10 +14,12 @@ html, body {
 }
 html {
 	background: #000;
+	overflow: hidden;
 }
 .body {
 	overflow: hidden;
 	opacity: 0;
+	position: relative;
 }
 .main {
 	width: 100%;
@@ -64,10 +66,10 @@ html {
 	position: relative;
 	flex-wrap: wrap;
 	justify-content: center;
-	padding: 15px;
+	padding: 10px;
 }
 .game {
-	width: 350px;
+	width: 300px;
 	position: relative;
 	padding: 15px;
 }
@@ -239,12 +241,12 @@ html {
 .status-visible #my-form-status {
 	display: block;
 }
-@media all and (max-width: 1080px) and (min-width: 560px) {
+@media all and (max-width: 1250px) and (min-width: 560px) {
 	.games {
-		padding: 0.5vw;
+		padding: 4vw 0.5vw;
 	}
 	.game {
-		width: calc(100% / 3);
+		width: calc(100% / 4);
 		padding: 1vw;
 	}
 	.title_size_m {
@@ -254,31 +256,25 @@ html {
     	font-size: 1.6vw;
 	}
 	.game__btn {
-		font-size: 2vw;
-		padding: 2vw;
+		font-size: 14px;
+		padding: 1.4vw;
+		text-align: center;
 	}
 }
-@media all and (max-width: 560px) {
-	.body {
+@media all and (max-width: 900px), all and (max-height: 500px) {
+	.animation_completed {
 		overflow: auto;
 	}
 	.main {
 		display: block;
 		height: auto;
 	}
-	.logo {
-		margin: 30px auto 0px auto;
-		top: 0;
-		left: 0;
-		position: relative;
-		height: 100px;
-		transform: none;
-	}
 	.games {
 		display: block;
 		opacity: 0;
 		transition: opacity 2s;
 		transition-delay: .5s;
+		margin: 100px 0 0 0;
 	}
 	.game {
 		width: 300px;

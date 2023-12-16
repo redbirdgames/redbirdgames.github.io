@@ -1,14 +1,9 @@
-const _MIN_WIDTH = 560;
+const _MIN_WIDTH = 700;
 
 window.addEventListener('load', event => {
 	document.body.classList.add('body_loaded');
 
 	new ContactForm();
-
-	if (window.innerWidth <= _MIN_WIDTH) {
-		return;
-	}
-
 	new Main().start();
 });
 
@@ -110,7 +105,7 @@ class Logo {
 
 	create() {
 		this._logo.style.top = '50%';
-		this._logo.style.width = '323px';
+		this._logo.style.width = '200px';
 		this._leftImg.style.transform = 'translate(-100%, -50%)';
 		this._rightImg.style.transform = 'translate(20%, -55%)';
 	}
@@ -139,6 +134,9 @@ class Logo {
 			top: '7%'
 		}, `+=${this._DELAY_BEFORE_FLY}`);
 		this._timeline.add(() => {
+			document.body.classList.add('animation_completed');
+
+			document.documentElement.style.overflow = 'auto';
 			this._rightImg.style.animation = 'fly 2.5s linear infinite';
 		});
 	}
